@@ -77,13 +77,17 @@ body {
 }
 
 .boton-empezar {
-    width: 530px;
-    height: 250px;
+    width: 500px;
+    height: 220px;
     background: #ecf0f1;
     color: #2c3e50;
     font-size: 2.5rem;
     font-family: 'Kaushan Script', cursive;
     position: absolute;
-    top: calc(50% - 125px);
-    left: calc(50% - 265px);
+    top: calc(50% - 110px);
+    left: calc(50% - 250px);
+}
+
+.hide {
+    display: none;
 }

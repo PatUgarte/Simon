@@ -9,8 +9,7 @@
 </head>
 
 <body>
-  <div class="marco">
-    <div class="gameboard">
+    <div id="gameboard" class="gameboard hide">
       <div class="logo">
         <p>SIMON</p>
       </div>
@@ -18,11 +17,9 @@
       <div id="amarillo" class="color amarillo right" data-color="amarillo"></div>
       <div id="rojo" class="color rojo left" data-color="rojo"></div>
       <div id="azul" class="color azul right" data-color="azul"></div>
-      <button id="boton-empezar" class="boton-empezar" onclick="empezarJuego()">¡Empezar a jugar!</button>
     </div>
-  </div>
-
-  <script src="simonDiceWeb.js"></script>
+    <button id="boton-empezar" class="boton-empezar" onclick="empezarJuego()">¡Empezar a jugar!</button>
+  <script src="simon-dice.js"></script>
 </body>
 
 </html>
