@@ -1,0 +1,89 @@
+body {
+    margin: 0;
+    background: lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+}
+
+.logo-container {
+    height: 60vh;
+    width: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.gameboard {
+    height: 100vh;
+    width: 100vh;
+    border-radius: 25%;
+    overflow: hidden;
+    margin: 0 auto;
+    max-height: 60vh;
+    max-width: 60vh;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    background-color: black;
+    color: yellow;
+    height: 30vh;
+    width: 30vh;
+    position: absolute;
+    border-radius: 100%;
+    font-size: 5vh;
+}
+
+.logo p {
+    line-height: 30vh;
+    margin: auto;
+    text-align: center;
+}
+
+.color {
+    width: 50%;
+    height: 50%;
+    display: inline-block;
+}
+
+.left {
+    float: left;
+}
+
+.right {
+    float: left;
+}
+
+.verde {
+    background-color: green;
+}
+
+.amarillo {
+    background-color: yellow;
+}
+
+.rojo {
+    background-color: red;
+}
+
+.azul {
+    background-color: blue;
+}
+
+.boton-empezar {
+    width: 530px;
+    height: 250px;
+    background: #ecf0f1;
+    color: #2c3e50;
+    font-size: 2.5rem;
+    font-family: 'Kaushan Script', cursive;
+    position: absolute;
+    top: calc(50% - 125px);
+    left: calc(50% - 265px);
+}
