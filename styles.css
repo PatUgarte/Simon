@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    background: lightgrey;
+    background: darkgrey;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,12 +22,13 @@ body {
     border-radius: 25%;
     overflow: hidden;
     margin: 0 auto;
-    max-height: 60vh;
-    max-width: 60vh;
+    max-height: 80vh;
+    max-width: 80vh;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
     align-items: center;
+    background-color: white;
 }
 
 .logo {
@@ -38,6 +39,8 @@ body {
     position: absolute;
     border-radius: 100%;
     font-size: 5vh;
+    overflow-y: visible;
+    z-index: 1;
 }
 
 .logo p {
@@ -76,6 +79,10 @@ body {
     background-color: blue;
 }
 
+.light {
+    opacity: 0.3;
+}
+
 .boton-empezar {
     width: 500px;
     height: 220px;
@@ -86,6 +93,7 @@ body {
     position: absolute;
     top: calc(50% - 110px);
     left: calc(50% - 250px);
+    border-radius: 100px;
 }
 
 .hide {
