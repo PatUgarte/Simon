@@ -1,6 +1,7 @@
 body {
     margin: 0;
-    background: darkgrey;
+    background-image: url(./img/background.jpg);
+    background-size: cover;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -66,23 +67,23 @@ body {
 }
 
 .verde {
-    background-color: green;
+    background-color: yellowgreen;
 }
 
 .amarillo {
-    background-color: yellow;
+    background-color: gold;
 }
 
 .rojo {
-    background-color: red;
+    background-color: lightcoral;
 }
 
 .azul {
-    background-color: blue;
+    background-color: skyblue;
 }
 
 .light {
-    opacity: 0.6;
+    opacity: 0.3;
 }
 
 .boton-empezar {
@@ -96,6 +97,10 @@ body {
     top: calc(50% - 110px);
     left: calc(50% - 250px);
     border-radius: 100px;
+}
+
+.clickeable:hover {
+    cursor: pointer;
 }
 
 .hide {

@@ -8,9 +8,9 @@ const azul = document.getElementById("azul");
 const botonEmpezar = document.getElementById("boton-empezar");
 
 const CANTIDAD_NIVELES = 10;
-const TIEMPO_ENCENDIDO = 500;
-const TIEMPO_ENTRE_NIVELES = 1000;
-const TIEMPO_ENTRE_SECUENCIAS = 1000;
+const TIEMPO_ENCENDIDO = 800;
+const TIEMPO_ENTRE_NIVELES = 1100;
+const TIEMPO_ENTRE_SECUENCIAS = 1100;
 const TIEMPO_ALERTA = 750;
 
 class Juego {
@@ -70,12 +70,14 @@ class Juego {
     agregarEventosClick() {
         for (const key in this.colores) {
             this.colores[key].addEventListener("click", this.elegirColor);
+            this.colores[key].classList.add("clickeable");
         }
     }
 
     eliminarEventosClick() {
         for (const key in this.colores) {
             this.colores[key].removeEventListener("click", this.elegirColor);
+            this.colores[key].classList.remove("clickeable");
         }
     }
 
