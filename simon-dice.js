@@ -15,9 +15,11 @@ class Juego {
     }
 
     inicializarJuego() {
+        this.elegirColor = this.elegirColor.bind(this);
         botonEmpezar.classList.add("hide");
         gameboard.classList.remove("hide");
         this.nivel = 1;
+        this.jugada = 0;
         this.colores = { verde, amarillo, rojo, azul };
     }
 
@@ -27,6 +29,8 @@ class Juego {
 
     avanzarUnNivel() {
         setTimeout(() => this.iluminarSecuencia(), 500);
+        this.agregarEventosClick();
+        this.jugada = 0;
     }
 
     iluminarSecuencia() {
@@ -48,6 +52,46 @@ class Juego {
         objetoColor.classList.remove("light");
     }
 
+    agregarEventosClick() {
+        for (const key in this.colores) {
+            this.colores[key].addEventListener("click", this.elegirColor);
+        }
+    }
+
+    eliminarEventosClick() {
+        for (const key in this.colores) {
+            this.colores[key].removeEventListener("click", this.elegirColor);
+        }
+    }
+
+    reinciarJuego() {
+        gameboard.classList.add("hide");
+        botonEmpezar.classList.remove("hide");
+    }
+
+    elegirColor(e) {
+        const nombreColor = e.target.dataset.color;
+        const numeroColor = this.obtenerNumeroDe(nombreColor);
+        this.iluminar(nombreColor);
+        if (numeroColor === this.secuencia[this.jugada]){
+            this.jugada++;
+            if (this.jugada === this.nivel){
+                this.nivel++;
+                this.eliminarEventosClick();
+                if (this.nivel > CANTIDAD_NIVELES) {
+                    alert("GANASTE");
+                } else {
+                    this.avanzarUnNivel();
+                }
+            }
+        } else {
+            alert("PERDISTE",);
+            this.nivel = 1;
+            this.reinciarJuego();
+            this.eliminarEventosClick();
+        }
+    }
+
     obtenerColorDe(numero) {
         switch (numero) {
             case 0:
@@ -58,6 +102,21 @@ class Juego {
                 return "rojo";
             case 3:
                 return "azul";
+            default:
+                return "null";
+        }
+    }
+
+    obtenerNumeroDe(color) {
+        switch (color) {
+            case "verde":
+                return 0;
+            case "amarillo":
+                return 1;
+            case "rojo":
+                return 2;
+            case "azul":
+                return 3;
             default:
                 return "null";
         }
