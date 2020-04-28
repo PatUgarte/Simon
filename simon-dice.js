@@ -1,11 +1,17 @@
 const gameboard = document.getElementById("gameboard");
+
 const verde = document.getElementById("verde");
 const amarillo = document.getElementById("amarillo");
 const rojo = document.getElementById("rojo");
 const azul = document.getElementById("azul");
+
 const botonEmpezar = document.getElementById("boton-empezar");
 
 const CANTIDAD_NIVELES = 10;
+const TIEMPO_ENCENDIDO = 500;
+const TIEMPO_ENTRE_NIVELES = 1000;
+const TIEMPO_ENTRE_SECUENCIAS = 1000;
+const TIEMPO_ALERTA = 750;
 
 class Juego {
     constructor() {
@@ -28,8 +34,8 @@ class Juego {
     }
 
     avanzarUnNivel() {
-        setTimeout(() => this.iluminarSecuencia(), 500);
-        this.agregarEventosClick();
+        this.eliminarEventosClick();
+        setTimeout(() => this.iluminarSecuencia(), TIEMPO_ENTRE_NIVELES);
         this.jugada = 0;
     }
 
@@ -37,17 +43,26 @@ class Juego {
         for (let i = 0; i < this.nivel; i++) {
             let valor = this.secuencia[i];
             let color = this.obtenerColorDe(valor);
-            setTimeout(() => this.iluminar(color), 1000 * i);
+            setTimeout(() => {
+                this.iluminar(color);
+                this.terminoLaSecuencia(i) ? this.agregarEventosClick() : "";
+            }, TIEMPO_ENTRE_SECUENCIAS * i);
         }
     }
 
-    iluminar(unColor) {
-        let objetoColor = this.colores[unColor];
-        objetoColor.classList.add("light");
-        setTimeout(() => this.apagar(unColor), 250);
+    terminoLaSecuencia(vuelta) {
+        return vuelta === this.nivel - 1;
     }
 
-    apagar(unColor) {
+    iluminar(unColor) {
+        let audio = this.reproducir(unColor);
+        let objetoColor = this.colores[unColor];
+        objetoColor.classList.add("light");
+        setTimeout(() => this.apagar(unColor, audio), TIEMPO_ENCENDIDO);
+    }
+
+    apagar(unColor, audio) {
+        audio.pause();
         let objetoColor = this.colores[unColor];
         objetoColor.classList.remove("light");
     }
@@ -65,17 +80,20 @@ class Juego {
     }
 
     ganoElJuego() {
+        let audio = this.reproducir("victoria");
         setTimeout(() => {
             swal("¡GANASTE!", "Sos un/a crack :)", "success")
                 .then(() => {
+                    audio.pause();
                     this.nivel = 1;
                     this.reinciarJuego();
                     this.eliminarEventosClick();
                 });
-        }, 250);
+        }, TIEMPO_ALERTA);
     }
 
     perdioElJuego() {
+        let audio = this.reproducir("derrota");
         setTimeout(() => {
             swal({
                 title: "¡Perdiste!",
@@ -84,11 +102,12 @@ class Juego {
                 button: "Ok..."
             })
                 .then(() => {
+                    audio.pause();
                     this.nivel = 1;
                     this.reinciarJuego();
                     this.eliminarEventosClick();
                 });
-        }, 500);
+        }, TIEMPO_ALERTA);
     }
 
     reinciarJuego() {
@@ -104,7 +123,6 @@ class Juego {
             this.jugada++;
             if (this.jugada === this.nivel) {
                 this.nivel++;
-                this.eliminarEventosClick();
                 if (this.nivel > CANTIDAD_NIVELES) {
                     this.ganoElJuego();
                 } else {
@@ -114,6 +132,13 @@ class Juego {
         } else {
             this.perdioElJuego();
         }
+    }
+
+    reproducir(sonido) {
+        let ruta = `./sonidos/${sonido}.mp3`;
+        let audio = new Audio(ruta);
+        audio.play();
+        return audio;
     }
 
     obtenerColorDe(numero) {
