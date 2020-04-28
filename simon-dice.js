@@ -64,6 +64,33 @@ class Juego {
         }
     }
 
+    ganoElJuego() {
+        setTimeout(() => {
+            swal("¡GANASTE!", "Sos un/a crack :)", "success")
+                .then(() => {
+                    this.nivel = 1;
+                    this.reinciarJuego();
+                    this.eliminarEventosClick();
+                });
+        }, 250);
+    }
+
+    perdioElJuego() {
+        setTimeout(() => {
+            swal({
+                title: "¡Perdiste!",
+                text: "Mejor suerte la próxima...",
+                icon: "error",
+                button: "Ok..."
+            })
+                .then(() => {
+                    this.nivel = 1;
+                    this.reinciarJuego();
+                    this.eliminarEventosClick();
+                });
+        }, 500);
+    }
+
     reinciarJuego() {
         gameboard.classList.add("hide");
         botonEmpezar.classList.remove("hide");
@@ -73,22 +100,19 @@ class Juego {
         const nombreColor = e.target.dataset.color;
         const numeroColor = this.obtenerNumeroDe(nombreColor);
         this.iluminar(nombreColor);
-        if (numeroColor === this.secuencia[this.jugada]){
+        if (numeroColor === this.secuencia[this.jugada]) {
             this.jugada++;
-            if (this.jugada === this.nivel){
+            if (this.jugada === this.nivel) {
                 this.nivel++;
                 this.eliminarEventosClick();
                 if (this.nivel > CANTIDAD_NIVELES) {
-                    alert("GANASTE");
+                    this.ganoElJuego();
                 } else {
                     this.avanzarUnNivel();
                 }
             }
         } else {
-            alert("PERDISTE",);
-            this.nivel = 1;
-            this.reinciarJuego();
-            this.eliminarEventosClick();
+            this.perdioElJuego();
         }
     }
 

@@ -6,6 +6,7 @@ body {
     align-items: center;
     height: 100vh;
     width: 100vw;
+    font-family: 'Kaushan Script', cursive;
 }
 
 .logo-container {
@@ -48,7 +49,6 @@ body {
     text-align: center;
     font-family: 'Kaushan Script', cursive;
     color: #ecf0f1;
-
 }
 
 .color {
